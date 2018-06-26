@@ -23,9 +23,8 @@ namespace Battleships.Model
 
         public IShootingStrategy ShootingStrategy { get; set; }
 
-        public Player(string name)
+        public Player()
         {
-            Name = name;
             // Each player has 1 Battleship & 2 Destroyers (currently)
             // TODO - Would be nice to have this as a configuration option
             Ships = new List<Ship>()

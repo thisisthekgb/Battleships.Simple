@@ -1,5 +1,7 @@
 ﻿using System;
 using Battleships.Model.Strategies;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Battleships.Model.Game
 {
@@ -20,65 +22,95 @@ namespace Battleships.Model.Game
     /// </summary>
     public class Game
     {
-        // Just set a single player against the computer..
-        public Player Player { get; set; }
-        public Player Computer { get; set; }
+        private const string TheComputer = "Mighty Computer";
 
-        public Game()
+        private List<Player> Players;
+        private Player player1;
+        private Player player2;
+        private string _singlePlayerName;
+
+        public Game(string playerName)
         {
-            Player = new Player("Kgb"); 
-            Computer = new Player("Mighty Computer");
-
-            Player.SetupGameBoard();
-            Computer.SetupGameBoard();
-
-            // Override the default random shooting strategy for the player...
-            Player.ShootingStrategy = new ManualShotStrategy();
+            _singlePlayerName = playerName;
         }
 
         /// <summary>
-        /// Set up a round where the player goes first followed by the computer...
+        /// Set up a game against the computer
         /// </summary>
-        public void PlayRound()
+        public Game SetupSimpleGameVersusComputer()
         {
+            player1 = new Player()
+            {
+                Name = _singlePlayerName,
+                ShootingStrategy = new ManualShotStrategy() // override the shooting strategy to nbe manual !
+            };
+
+            //TODO - Note shootingStrategy for the computer is currently random its needs a bit of intelligence
+            player2 = new Player()
+            {
+                Name = TheComputer
+            };
+
+            Players = new List<Player>
+            {
+                player1,
+                player2
+            };
+
+            Players.ForEach(player => player.SetupGameBoard());
+            return this;
+        }
+
+        /// <summary>
+        /// Set up a round where player1 goes first followed by player2
+        /// </summary>
+        private bool PlayRound()
+        {
+            bool gameOn = true;
             Console.WriteLine($"Here are your game and shooting boards...");
 
-            Player.DisplayBoards();
+            player1.DisplayBoards();
 
-            var coordinates = Player.GetShot();
-            var result = Computer.ProcessShot(coordinates);
-            Console.WriteLine($"{Computer.Name} says '{result}'");
-            Player.ProcessShotResult(coordinates, result);
+            var coordinates = player1.GetShot();
+            var shotResult = player2.ProcessShot(coordinates);
+            Console.WriteLine($"{player2.Name} says '{shotResult}'");
+            player1.ProcessShotResult(coordinates, shotResult);
 
-            if (Computer.HasLost)
+            if (player2.HasLost)
             {
-                Console.WriteLine($"Congratulations '{Player.Name}' has won the game!");
-                Console.WriteLine($"Here are the '{Computer.Name}' boards");
-                Computer.DisplayBoards();
+                Console.WriteLine($"Congratulations '{player1.Name}' has won the game!");
+                Console.WriteLine($"Here are the '{player2.Name}' boards");
+                player2.DisplayBoards();
+                gameOn = false;
             }
             else
             {
-                coordinates = Computer.GetShot();
-                Console.WriteLine($"{Computer.Name} tried a shot at '{coordinates}'");
-                result = Player.ProcessShot(coordinates);
-                Console.WriteLine($"{Player.Name} says '{result}'");
-                Computer.ProcessShotResult(coordinates, result);
+                coordinates = player2.GetShot();
+                Console.WriteLine($"{player2.Name} tried a shot at '{coordinates}'");
+                shotResult = player1.ProcessShot(coordinates);
+                Console.WriteLine($"{player1.Name} says '{shotResult}'");
+                player2.ProcessShotResult(coordinates, shotResult);
 
-                if (Player.HasLost)
+                if (player1.HasLost)
                 {
-                    Console.WriteLine($"Congratulations '{Computer.Name}' has won the game!");
-                    Console.WriteLine($"Here are the '{Player.Name}' boards");
-                    Player.DisplayBoards();
+                    Console.WriteLine($"Congratulations '{player2.Name}' has won the game!");
+                    Console.WriteLine($"Here are the '{player1.Name}' boards");
+                    player1.DisplayBoards();
+                    gameOn = false;
                 }
             }
-
+            return gameOn;
         }
 
+        /// <summary>
+        /// Play a game between 'player1 and the computer
+        /// </summary>
         public void PlayToEnd()
         {
-            while (!Player.HasLost && !Computer.HasLost)
+            var gameOn = true;
+            while (gameOn && player1 != null && player2 != null)
             {
-                PlayRound();
+                gameOn = PlayRound();
             }
 
             Console.Write("Press any key to exit...");

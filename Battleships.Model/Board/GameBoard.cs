@@ -67,10 +67,22 @@ namespace Battleships.Model.Board
         {
             for (int row = 1; row <= BoardSize; row++)
             {
+                if (row == 1)
+                {
+                    Console.Write("    ");
+                    for (int col = 1; col <= BoardSize; col++)
+                    {
+                        char column = (char)(col + 64);
+                        Console.Write($"{column} ");
+                    }
+                    Console.WriteLine(Environment.NewLine);
+                }
+                Console.Write($"{row,3} ");
+
                 for (int col = 1; col <= BoardSize; col++)
                 {
                     var cell = Cells.At(row, col) as GameCell;
-                    Console.Write(cell.OccupiedState.Description());
+                    Console.Write($"{cell.OccupiedState.Description()} ");
                 }
                 Console.WriteLine(Environment.NewLine);
             }
