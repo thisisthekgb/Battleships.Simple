@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9DDBBA8D-EDC8-4821-B34F-9B45D795F0FC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Battleships.Model</RootNamespace>
+    <AssemblyName>Battleships.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Board\BoardBase.cs" />
+    <Compile Include="Board\GameCell.cs" />
+    <Compile Include="Board\ShootingCell.cs" />
+    <Compile Include="Board\Coordinates.cs" />
+    <Compile Include="Interfaces\IGameBoard.cs" />
+    <Compile Include="Board\ShootingBoard.cs" />
+    <Compile Include="Board\GameBoard.cs" />
+    <Compile Include="Board\Cell.cs" />
+    <Compile Include="Enums\CellType.cs" />
+    <Compile Include="Enums\ShotType.cs" />
+    <Compile Include="Enums\ShipType.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\CellExtensions.cs" />
+    <Compile Include="Interfaces\IPlaceShipStrategy.cs" />
+    <Compile Include="Interfaces\IShootingStrategy.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strategies\ManualShotStrategy.cs" />
+    <Compile Include="Strategies\RandomPlaceShipStrategy.cs" />
+    <Compile Include="Strategies\RandomShotStrategy.cs" />
+    <Compile Include="Vessel\Battleship.cs" />
+    <Compile Include="Vessel\Destroyer.cs" />
+    <Compile Include="Interfaces\IShip.cs" />
+    <Compile Include="Vessel\Ship.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
