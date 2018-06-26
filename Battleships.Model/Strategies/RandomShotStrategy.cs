@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace Battleships.Model.Strategies
 {
+    /// <summary>
+    /// Provide a random shot strategy for battleship coordinates
+    /// </summary>
     public class RandomShotStrategy : IShootingStrategy
     {
         private ShootingBoard _board;

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Battleships.Model.Extensions;
-
 namespace Battleships.Model.Board
 {
-
+    /// <summary>
+    /// Represents a grid of cells for a gaming board.
+    /// </summary>
     abstract public class BoardBase
     {
         private const int BoardSizeDefault = 10;    // TODO start at 10 but make it configuratble later

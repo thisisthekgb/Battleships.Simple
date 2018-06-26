@@ -7,6 +7,9 @@ using System.Text.RegularExpressions;
 
 namespace Battleships.Model.Strategies
 {
+    /// <summary>
+    /// Provide a manual strategy for getting shot coords from player.
+    /// </summary>
     public class ManualShotStrategy : IShootingStrategy
     {
         private Coordinates ConvertToCoordinates(string input)

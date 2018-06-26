@@ -7,6 +7,9 @@ using Battleships.Model.Extensions;
 
 namespace Battleships.Model.Strategies
 {
+    /// <summary>
+    /// Provide a random placement strategy for placing ships on board.
+    /// </summary>
     public class RandomPlaceShipStrategy : IPlaceShipStrategy
     {
         public IEnumerable<Cell> WhereToPlaceShip(IShip ship, BoardBase board)
@@ -35,6 +38,7 @@ namespace Battleships.Model.Strategies
                     endrow += ship.Width - 1;
                 }
 
+                // TODO - make these rules for the game !
                 // If we pass any specific rules for the board then continue to place the ship...
                 // We cannot place ships beyond the boundaries of the board
                 if (endrow > board.BoardSize || endcolumn > board.BoardSize)

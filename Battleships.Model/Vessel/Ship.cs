@@ -36,7 +36,7 @@ namespace Battleships.Model.Vessel
         }
 
         /// <summary>
-        /// A shot on an existing ship is a hit !
+        /// A shot on an existing ship is a hit and its sunk when its destroyed.!
         /// </summary>
         public ShotType ProcessShot()
         {

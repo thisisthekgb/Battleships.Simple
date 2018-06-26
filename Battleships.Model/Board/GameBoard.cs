@@ -1,6 +1,4 @@
-﻿
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System;
 
 using Battleships.Model.Extensions;
@@ -11,7 +9,7 @@ using Battleships.Model.Strategies;
 namespace Battleships.Model.Board
 {
     /// <summary>
-    /// Represents a players board as a collection of cells where their ships can be placed).
+    /// Represents a players board where their ships can be placed).
     /// </summary>
     public class GameBoard : BoardBase, IGameBoard
     {
@@ -61,6 +59,10 @@ namespace Battleships.Model.Board
 
         }
 
+        /// <summary>
+        /// Display the board
+        /// TODO - remove this as delegate !!
+        /// </summary>
         public override void Display()
         {
             for (int row = 1; row <= BoardSize; row++)

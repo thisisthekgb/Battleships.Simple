@@ -1,6 +1,5 @@
 ﻿using Battleships.Model.Enums;
 using Battleships.Model.Vessel;
-using Battleships.Model.Extensions;
 
 namespace Battleships.Model.Board
 {
