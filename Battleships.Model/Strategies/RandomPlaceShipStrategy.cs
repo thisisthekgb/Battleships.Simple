@@ -12,8 +12,37 @@ namespace Battleships.Model.Strategies
     /// </summary>
     public class RandomPlaceShipStrategy : IPlaceShipStrategy
     {
+        private BoardBase CurrentBoard { get; set; }
+
+        /// <summary>
+        /// Are row column out of bounds of board
+        /// </summary>
+        /// <param name="endrow"></param>
+        /// <param name="endcolumn"></param>
+        /// <returns></returns>
+        private bool IsOutOfBounds(int endrow, int endcolumn)
+        {
+            return (endrow > CurrentBoard.BoardSize || endcolumn > CurrentBoard.BoardSize);
+        }
+
+        /// <summary>
+        /// Are any of the cells within the range of cells occupied.
+        /// </summary>
+        /// <param name="startrow"></param>
+        /// <param name="startcolumn"></param>
+        /// <param name="endrow"></param>
+        /// <param name="endcolumn"></param>
+        /// <returns></returns>
+        private bool IsOccupied(int startrow, int startcolumn, int endrow, int endcolumn)
+        {
+            var shipLocation = CurrentBoard.Cells.Range(startrow, startcolumn, endrow, endcolumn);
+            return (shipLocation.Any(x => ((GameCell)x).IsOccupied));
+        }
+
         public IEnumerable<Cell> WhereToPlaceShip(IShip ship, BoardBase board)
         {
+            CurrentBoard = board;
+
             IEnumerable<Cell> shipLocation = null;
 
             // Seed the randome number generator..
@@ -38,20 +67,13 @@ namespace Battleships.Model.Strategies
                     endrow += ship.Width - 1;
                 }
 
-                // TODO - make these rules for the game !
-                // If we pass any specific rules for the board then continue to place the ship...
-                // We cannot place ships beyond the boundaries of the board
-                if (endrow > board.BoardSize || endcolumn > board.BoardSize)
-                {
-                    continue;
-                }
+                // Check that the strategy hasnt broken any game rules...
+                // TODO - MAKE THESE RULES OF THE GAME THAT ALL STRATEGIES SHOULD CHECK !
+                if (IsOutOfBounds(endrow,endcolumn)) continue;
+                if (IsOccupied(startrow, startcolumn, endrow, endcolumn)) continue;
 
-                //Check if specified cells are occupied
-                shipLocation = board.Cells.Range(startrow, startcolumn, endrow, endcolumn);
-                if (shipLocation.Any(x => ((GameCell)x).IsOccupied))
-                {
-                    continue;
-                }
+                // Return the ship location
+                shipLocation = CurrentBoard.Cells.Range(startrow, startcolumn, endrow, endcolumn);
 
                 break;
             }

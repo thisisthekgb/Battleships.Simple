@@ -14,6 +14,8 @@ namespace Battleships.Model.Enums
         [Description("S")]
         Sunk,
         [Description(".")]
-        Unknown
+        Unknown,
+        [Description("Youve already shot there !")]
+        Existing
     }
 }

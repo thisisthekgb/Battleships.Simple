@@ -24,7 +24,7 @@ namespace Battleships.Model.Strategies
                     var input = Console.ReadLine();
                     return new Coordinates(input);
                 }
-                catch (Exception ex)
+                catch 
                 {
                     Console.WriteLine("Invalid input...try again !");
                 }

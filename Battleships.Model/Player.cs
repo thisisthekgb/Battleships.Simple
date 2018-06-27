@@ -106,19 +106,10 @@ namespace Battleships.Model
             switch (result)
             {
                 case ShotType.Hit:
-                    {
-                        cell.ShotType = ShotType.Hit;
-                        break;
-                    }
-
                 case ShotType.Miss:
-                    {
-                        cell.ShotType = ShotType.Miss;
-                        break;
-                    }
                 case ShotType.Sunk:
                     {
-                        cell.ShotType = ShotType.Sunk;
+                        cell.ShotType = result;
                         break;
                     }
                 default:
@@ -136,6 +127,15 @@ namespace Battleships.Model
         public Coordinates GetShot()
         {
             return ShootingStrategy.GetShot();
+        }
+
+        /// <summary>
+        /// Provide whatever we eant to show for a player...but Name seems ok
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"{Name}";
         }
     }
 }

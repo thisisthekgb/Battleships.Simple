@@ -78,23 +78,23 @@ namespace Battleships.Model.Game
 
             if (player2.HasLost)
             {
-                Console.WriteLine($"Congratulations '{player1.Name}' has won the game!");
-                Console.WriteLine($"Here are the '{player2.Name}' boards");
+                Console.WriteLine($"Congratulations '{player1}' has won the game!");
+                Console.WriteLine($"Here are the '{player2}' boards");
                 player2.DisplayBoards();
                 gameOn = false;
             }
             else
             {
                 coordinates = player2.GetShot();
-                Console.WriteLine($"{player2.Name} tried a shot at '{coordinates}'");
+                Console.WriteLine($"{player2} tried a shot at '{coordinates}'");
                 shotResult = player1.ProcessShot(coordinates);
-                Console.WriteLine($"{player1.Name} says '{shotResult}'");
+                Console.WriteLine($"{player1} says '{shotResult}'");
                 player2.ProcessShotResult(coordinates, shotResult);
 
                 if (player1.HasLost)
                 {
-                    Console.WriteLine($"Congratulations '{player2.Name}' has won the game!");
-                    Console.WriteLine($"Here are the '{player1.Name}' boards");
+                    Console.WriteLine($"Congratulations '{player2}' has won the game!");
+                    Console.WriteLine($"Here are the '{player1}' boards");
                     player1.DisplayBoards();
                     gameOn = false;
                 }

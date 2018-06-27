@@ -16,11 +16,11 @@ namespace Battleships.Model.Extensions
         /// <returns></returns>
         public static Cell At(this IEnumerable<Cell> cells, int row, int column)
         {
-            return cells.Where(x => x.Coordinates.Row == row && x.Coordinates.Column == column).FirstOrDefault();
+            return cells.Where(cell => cell.Coordinates.Row == row && cell.Coordinates.Column == column).FirstOrDefault();
         }
 
         /// <summary>
-        /// Return range of cells between start and end rows/columns inclusive.
+        /// Return range of cells that fall between start and end rows/columns inclusive.
         /// </summary>
         /// <param name="cells"></param>
         /// <param name="startRow"></param>
@@ -30,10 +30,10 @@ namespace Battleships.Model.Extensions
         /// <returns></returns>
         public static IEnumerable<Cell> Range(this IEnumerable<Cell> cells, int startRow, int startColumn, int endRow, int endColumn)
         {
-            return cells.Where(x => x.Coordinates.Row >= startRow 
-                                     && x.Coordinates.Column >= startColumn 
-                                     && x.Coordinates.Row <= endRow 
-                                     && x.Coordinates.Column <= endColumn).ToList();
+            return cells.Where(cell => cell.Coordinates.Row >= startRow 
+                                     && cell.Coordinates.Column >= startColumn 
+                                     && cell.Coordinates.Row <= endRow 
+                                     && cell.Coordinates.Column <= endColumn).ToList();
         }
     }
 }
